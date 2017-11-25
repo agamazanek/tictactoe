@@ -45,11 +45,12 @@ public class Game {
             throw new IllegalArgumentException();
         }
         int i = (y - 1) * BOARD_SIZE + (x - 1);
+
         if(board[i] != Symbol.EMPTY) {
             throw new BoardCellNotEmptyException();
-        } else {
-            board[i] = symbol;
         }
+
+        board[i] = symbol;
     }
 
     public boolean isEnded() {
