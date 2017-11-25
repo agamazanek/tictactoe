@@ -41,11 +41,19 @@ public class Game {
     }
 
     private void putSymbol(int x, int y, Symbol symbol) {
+        if( x < 1 || x > BOARD_SIZE || y < 1 || y > BOARD_SIZE) {
+            throw new IllegalArgumentException();
+        }
         int i = (y - 1) * BOARD_SIZE + (x - 1);
-        board[i] = symbol;
+        if(board[i] != Symbol.EMPTY) {
+            throw new BoardCellNotEmptyException();
+        } else {
+            board[i] = symbol;
+        }
     }
 
     public boolean isEnded() {
+
         for (Symbol symbol : board) {
             if(symbol == Symbol.EMPTY) {
                 return false;
@@ -54,6 +62,7 @@ public class Game {
 
         return true;
     }
+
 
     public Symbol getActualPlayerSymbol() {
         return isXTurn ? Symbol.X : Symbol.O;
